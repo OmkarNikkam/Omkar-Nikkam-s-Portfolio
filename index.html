@@ -997,14 +997,16 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <nav class="navbar">
 <div class="nav-container">
 <div class="logo">Omkar Vikram Nikkam</div>
+
 <ul class="nav-links">
 <li><a href="#about">About</a></li>
-<li><a href="#projects">Projects</a></li>
 <li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
 <li><a href="#experience">Experience</a></li>
 <li><a href="#education">Education</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
+
 <button aria-label="Toggle mobile menu" class="mobile-menu-btn" onclick="toggleMobileMenu()">
 <i class="fas fa-bars"></i>
 </button>
@@ -1132,8 +1134,7 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <p>Built a Python (PuLP) optimization with multi-capacity fleet sizing, time-window constraints, and subtour-elimination. Reduced total distance <strong>262 → 173 km</strong> and met <strong>100% demand</strong> with a hybrid fleet (16 kL, 24 kL, 32 kL).</p>
 <div class="tech-stack"><span class="tech-tag">Python</span><span class="tech-tag">PuLP</span><span class="tech-tag">Operations Research</span><span class="tech-tag">Logistics</span></div>
 <div class="card-links">
-<a class="card-link" href="#" title="Add GitHub link later"><i class="fab fa-github"></i> Code (soon)</a>
-<a class="card-link" href="#" title="Add report link later"><i class="fas fa-file-lines"></i> Report</a>
+<a class="card-link" href="https://drive.google.com/file/d/1eoa72xS-44CPVqBddNEQWYOHINjx3Oql/view?usp=sharing" target="_blank" rel="noopener"" title="Add report link later"><i class="fas fa-file-lines"></i> Report</a>
 </div>
 </div>
 <div class="card">
@@ -1141,7 +1142,7 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <p>Analyzed inventory for 16 SKUs using EOQ, ROP, and Safety Stock. Built a Power BI dashboard for stockout risk and supplier segmentation. Forecasted 24-month demand with Holt-Winters across 4 categories.</p>
 <div class="tech-stack"><span class="tech-tag">Excel</span><span class="tech-tag">Power BI</span><span class="tech-tag">Holt-Winters</span><span class="tech-tag">Inventory</span></div>
 <div class="card-links">
-<a class="card-link" href="#" title="Add dashboard link later"><i class="fas fa-chart-column"></i> Dashboard</a>
+<a class="card-link" href="https://app.powerbi.com/groups/me/dashboards/a246cd3c-2e2c-49c0-a708-cc5122ef77d9?ctid=e85c5307-76b1-4c48-bc5d-e88373dda261&pbi_source=linkShare" target="_blank" rel="noopener"><i class="fas fa-chart-column"></i> Dashboard</a>
 </div>
 </div>
 <div class="card">
@@ -1149,7 +1150,7 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <p>End-to-end ML workflow to predict return risk. EDA, cleaning, encoding; trained <strong>Random Forest</strong>, Logistic Regression, and Decision Tree; evaluated via accuracy, F1, and confusion matrix.</p>
 <div class="tech-stack"><span class="tech-tag">Python</span><span class="tech-tag">scikit-learn</span><span class="tech-tag">Pandas</span><span class="tech-tag">Classification</span></div>
 <div class="card-links">
-<a class="card-link" href="#" title="Add notebook link later"><i class="fab fa-github"></i> Notebook</a>
+<a class="card-link" href="https://omkarnikkam.github.io/-Product-Return-Classification-Python/" title="Add notebook link later"><i class="fab fa-github"></i> Notebook</a>
 </div>
 </div>
 </div>
@@ -1413,8 +1414,8 @@ document.querySelectorAll('#skills .skill-item').forEach((chip)=>{
   if(gi){ gi.addEventListener('click', function(e){ e.preventDefault(); smoothScrollTo('#contact'); }); }
   if(dr){ dr.addEventListener('click', function(e){
       e.preventDefault();
-      var resumePath = 'Omkar_Nikkam_Resume.pdf'; // ensure this exists in the repo root
-      window.open(resumePath, '_blank', 'noopener');
+      var resumePath = 'https://drive.google.com/file/d/1C4lx26yhAHKsR0KSwPVQrsFif7rC3Y35/view?usp=sharing'; // Drive viewer link
+      window.open('https://drive.google.com/file/d/1C4lx26yhAHKsR0KSwPVQrsFif7rC3Y35/view?usp=sharing', '_blank', 'noopener');
   }); }
 })();
 </script>
