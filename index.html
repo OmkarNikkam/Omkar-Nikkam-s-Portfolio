@@ -948,47 +948,65 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 
 
 <style>
-/* === Even larger circular skill buttons (fit long text cleanly) === */
-#skills .skills-circles{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:1.5rem;
-  margin-top:.7rem;
-}
-#skills .circle-tile{ display:flex; justify-content:center; }
-#skills .skill-circle{
-  --size: 155px;        /* bigger diameter */
-  --ring-w: 2px;
-  width:var(--size); height:var(--size);
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.12);
-  background: radial-gradient(170px 85px at 50% -30%, rgba(6,182,212,.08), transparent 60%), rgba(255,255,255,.02);
-  display:flex; align-items:center; justify-content:center; text-align:center;
-  cursor:pointer; outline:none; position:relative;
-  padding:14px;
-  transition: transform .12s ease, border-color .12s ease, background .12s ease;
-}
-#skills .skill-circle:hover{ transform: translateY(-2px); border-color: rgba(6,182,212,.45); }
-#skills .skill-text{
-  display:block; max-width:92%;
-  color: var(--text, #fff);
-  font-weight:800; font-size:.95rem; line-height:1.25;
-  text-align:center;
-  word-wrap:break-word; overflow-wrap:break-word;
-}
-/* rotating glowing ring */
-#skills .skill-circle .ring{
-  pointer-events:none; position:absolute; inset:-3px; border-radius:50%;
-  background: conic-gradient(from 0deg, rgba(6,182,212,0) 0deg, rgba(6,182,212,.95) 40deg, rgba(20,184,166,.95) 90deg, rgba(6,182,212,0) 140deg);
-  -webkit-mask: radial-gradient(circle, transparent calc(50% - var(--ring-w)), #000 calc(50% - var(--ring-w) + 1px));
-          mask: radial-gradient(circle, transparent calc(50% - var(--ring-w)), #000 calc(50% - var(--ring-w) + 1px));
-  opacity:0; transform: rotate(0deg); transition: opacity .15s ease;
-}
-#skills .skill-circle:hover .ring{ opacity:.9; animation: ringSpin 1.1s linear infinite; }
-#skills .skill-circle.is-active .ring{ opacity:1; animation: ringSpin 1.1s linear infinite; }
-@keyframes ringSpin { to { transform: rotate(360deg); } }
-#skills .skill-chips{ display:none !important; }
+
+
+/* === Skills: creative blue/teal circles === */
+#skills .skills-circles{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;margin-top:.7rem}
+@media (max-width:1100px){#skills .skills-circles{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:900px){#skills .skills-circles{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){#skills .skills-circles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){#skills .skills-circles{grid-template-columns:1fr}}
+#skills .circle-tile{display:flex;justify-content:center}
+#skills .skill-circle{--size:115px;--ring-w:2px;width:var(--size);height:var(--size);border-radius:50%;
+  border:2px solid rgba(20,184,166,.4);
+  background:linear-gradient(135deg, rgba(6,182,212,.15), rgba(20,184,166,.08)), #0f1418;
+  display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;outline:none;position:relative;padding:10px;
+  transition:transform .15s ease,border-color .15s ease,background .15s ease,box-shadow .15s ease}
+#skills .skill-circle:hover{transform:translateY(-3px) scale(1.04);border-color:#06b6d4;
+  background:linear-gradient(135deg, rgba(6,182,212,.25), rgba(20,184,166,.15)); 
+  box-shadow:0 0 15px rgba(6,182,212,.45), 0 0 30px rgba(20,184,166,.25)}
+#skills .skill-text{display:block;max-width:92%;color:var(--text,#fff);font-weight:700;font-size:.78rem;line-height:1.15;text-align:center;white-space:normal;word-break:keep-all;overflow-wrap:normal;hyphens:none;text-wrap:balance;letter-spacing:.1px;}
+
+/* subtle inner glow ring effect */
+#skills .skill-circle::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(6,182,212,.3), transparent 70%);
+  opacity:.4;transition:opacity .3s ease}
+#skills .skill-circle:hover::before{opacity:.8}
+
 </style>
+<style>
+#skills .skill-circle[aria-label="LP Modeling"] .skill-text{font-size:.72rem;line-height:1.1;letter-spacing:.08px}
+</style>
+<style>
+#skills .skill-circle[aria-label="LP Modeling"] .skill-text{font-size:.9rem;line-height:1.2;letter-spacing:.1px}
+</style>
+
+<style>
+/* === Mobile/Overlap Fixes === */
+.hero{ padding-top: calc(var(--nav-height, 72px) + 12px) !important; }
+@media (max-width: 768px){
+  .nav-links{ display:none !important; }
+  .hero{ padding-top: calc(var(--nav-height, 72px) + 8px) !important; }
+  .hero h1{ font-size: clamp(1.9rem, 7.5vw, 2.6rem) !important; line-height:1.15 !important; letter-spacing:.2px !important; }
+  .hero h2{ font-size: clamp(1.05rem, 4.5vw, 1.3rem) !important; line-height:1.2 !important; }
+  .hero .social-icons{ display:none !important; } /* keep icons only in Get In Touch on mobile */
+}
+</style>
+
+<style id="btn-link-color-fix">
+/* Keep button text white on all states for anchors styled as buttons */
+a.btn, a.btn:link, a.btn:visited, a.btn:hover, a.btn:active, a.btn:focus,
+.btn-primary, .btn-primary:link, .btn-primary:visited, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/* Optional: remove iOS tap highlight tint inside buttons */
+a.btn {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+</style>
+
 </head>
 <body>
 <!-- Scroll Indicator -->
@@ -1019,9 +1037,9 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <h2>Supply Chain Analytics and Optimization Enthusiast</h2>
 <p>Master’s student in Industrial and Systems Engineering passionate about supply chain analytics, demand forecasting, and applying LP models to improve real-world supply chain decisions.</p>
 <p class="location"><i class="fas fa-location-dot"></i> San Jose, California</p>
-<button id="btn-view-work" type="button" class="btn btn-primary">View My Work</button>
-<button id="btn-get-in-touch" type="button" class="btn btn-primary">Get In Touch</button>
-<button id="btn-download-resume" type="button" class="btn btn-primary">Download Resume</button>
+<a id="btn-view-work" href="#projects" class="btn btn-primary">View My Work</a>
+<a id="btn-get-in-touch" href="#contact" class="btn btn-primary">Get In Touch</a>
+<a id="btn-download-resume" href="https://drive.google.com/file/d/1C4lx26yhAHKsR0KSwPVQrsFif7rC3Y35/view?usp=sharing" class="btn btn-primary" target="_blank" rel="noopener">Download Resume</a>
 <div class="social-icons">
 <a href="https://www.linkedin.com/in/omkarnikkam" target="_blank"><i class="fab fa-linkedin-in"></i></a>
 <a href="mailto:nikkamomkarv@gmail.com"><i class="fas fa-envelope"></i></a>
@@ -1098,8 +1116,8 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
         </div></div></div><div aria-label="Supply Chain &amp; OR" class="skill-card" data-cat="supply-or" role="region">
 <h3>Supply Chain & OR</h3><div class="skills-circles">
         <div class="circle-tile">
-          <button class="skill-circle" type="button" aria-label="Linear Programming">
-            <span class="skill-text">Linear Programming</span>
+          <button class="skill-circle" type="button" aria-label="LP Modeling">
+            <span class="skill-text">LP Modeling</span>
             <span class="ring" aria-hidden="true"></span>
           </button>
         </div>
@@ -1143,6 +1161,7 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <div class="tech-stack"><span class="tech-tag">Excel</span><span class="tech-tag">Power BI</span><span class="tech-tag">Holt-Winters</span><span class="tech-tag">Inventory</span></div>
 <div class="card-links">
 <a class="card-link" href="https://app.powerbi.com/groups/me/dashboards/a246cd3c-2e2c-49c0-a708-cc5122ef77d9?ctid=e85c5307-76b1-4c48-bc5d-e88373dda261&pbi_source=linkShare" target="_blank" rel="noopener"><i class="fas fa-chart-column"></i> Dashboard</a>
+<a class="card-link" href="https://drive.google.com/file/d/1Yld2Gd_mC7BK0CmU4ZVM65Lfkjwd2GQi/view?usp=sharing" target="_blank" rel="noopener"><i class="fas fa-file-lines"></i> Report</a>
 </div>
 </div>
 <div class="card">
@@ -1151,6 +1170,7 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <div class="tech-stack"><span class="tech-tag">Python</span><span class="tech-tag">scikit-learn</span><span class="tech-tag">Pandas</span><span class="tech-tag">Classification</span></div>
 <div class="card-links">
 <a class="card-link" href="https://omkarnikkam.github.io/-Product-Return-Classification-Python/" title="Add notebook link later"><i class="fab fa-github"></i> Notebook</a>
+<a class="card-link" href="https://drive.google.com/file/d/1tqpYCK9r0tZJmFsXRTPEEwO0Y0HG6Gt5/view?usp=sharing" target="_blank" rel="noopener"><i class="fas fa-file-lines"></i> Report</a>
 </div>
 </div>
 </div>
@@ -1255,9 +1275,23 @@ a{color:var(--accent) !important;} a:hover{color:var(--accent-3) !important;}
 <h2 class="section-title">Get In Touch</h2>
 <p>I'm always open to discussing new opportunities, collaborations, or just having a conversation about supply chain analytics and data-driven solutions.</p>
 <div class="contact-icons">
-<a href="mailto:nikkamomkarv@gmail.com"><i class="fas fa-envelope"></i></a>
-<a href="https://www.linkedin.com/in/omkarnikkam" target="_blank"><i class="fab fa-linkedin"></i></a>
-<a href="tel:+16693257153"><i class="fas fa-phone"></i></a>
+<div class="contact-icons">
+  <a href="mailto:nikkamomkarv@gmail.com" aria-label="Email" title="Email">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8.236l7.386 6.154a1 1 0 0 0 1.228 0L20 8.236V18H4z"/>
+    </svg>
+  </a>
+  <a href="https://www.linkedin.com/in/omkarnikkam" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zM8 8h3.8v2.2h.1C12.6 8.7 14.6 8 16.8 8 21.4 8 24 10.7 24 15.3V24h-4v-7.5c0-1.8-.03-4.1-2.5-4.1-2.5 0-2.9 1.9-2.9 3.9V24h-4V8z"/>
+    </svg>
+  </a>
+  <a href="tel:+16693257153" aria-label="Phone" title="Phone">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21 16.5v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 1.5 3.18 2 2 0 0 1 3.5 1h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.63a2 2 0 0 1-.45 2.11L7.1 8.9a16 16 0 0 0 6 6l1.44-1.58a2 2 0 0 1 2.11-.45c.85.3 1.74.51 2.63.63A2 2 0 0 1 21 16.5z"/>
+    </svg>
+  </a>
+</div>
 </div>
 </section>
 <footer class="footer">© <span id="year"></span> Omkar Vikram Nikkam. All rights reserved.</footer>
